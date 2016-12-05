@@ -11,6 +11,7 @@ namespace hostingstart
                 .UseKestrel()
                 .UseUrls("http://*:80")
                 .UseStartup<Startup>()
+                .UseWebRoot("/defaulthome/hostingstart/static")
                 .Build();
 
             host.Run();

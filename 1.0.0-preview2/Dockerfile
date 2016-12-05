@@ -1,5 +1,6 @@
 FROM microsoft/dotnet:latest
 COPY src /defaulthome/hostingstart
+COPY static /defaulthome/hostingstart/static
 
 WORKDIR /defaulthome/hostingstart
 
