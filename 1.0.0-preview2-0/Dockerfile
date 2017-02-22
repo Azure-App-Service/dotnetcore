@@ -1,4 +1,6 @@
 FROM microsoft/dotnet:1.0.0-preview2-sdk
+MAINTAINER Nazim Lala <naziml@microsoft.com>
+
 COPY src /defaulthome/hostingstart
 COPY static /defaulthome/hostingstart/static
 COPY init_container.sh /bin/
