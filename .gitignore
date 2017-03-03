@@ -1,0 +1,3 @@
+*.suo
+*.cache
+*/src/obj/*
