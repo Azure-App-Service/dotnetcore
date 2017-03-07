@@ -1,8 +1,8 @@
 @echo off
 setlocal
 
-set FRAMEWORK=dotnetcore1.0
-set TEST_IMAGE_TAG=%USERNAME%/dotnetcore:1.0.0-msbuild
+set FRAMEWORK=dotnetcore1.1
+set TEST_IMAGE_TAG=%USERNAME%/dotnetcore:1.1.0-msbuild
 set ZIPFILE=bin.zip
 
 pushd src
