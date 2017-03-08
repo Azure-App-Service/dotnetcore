@@ -1,3 +1,5 @@
 *.suo
 *.cache
 */src/obj/*
+*/src/bin/*
+*/src/publish/*
