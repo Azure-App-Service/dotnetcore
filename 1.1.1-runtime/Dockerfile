@@ -2,14 +2,14 @@ FROM microsoft/dotnet:1.1.1-runtime
 MAINTAINER Azure App Services Container Images <appsvc-images@microsoft.com>
 
 COPY bin.zip /tmp
-COPY static /defaulthome/hostingstart/static
 COPY init_container.sh /bin/
 
 RUN apt-get update \
   && apt-get install -y apt-utils --no-install-recommends \
   && apt-get install -y unzip --no-install-recommends
 
-RUN unzip -q -o /tmp/bin.zip -d /defaulthome/hostingstart \
+RUN mkdir -p /defaulthome/hostingstart \ 
+    && unzip -q -o /tmp/bin.zip -d /defaulthome/hostingstart \
     && rm /tmp/bin.zip
 
 RUN echo "root:Docker!" | chpasswd \
@@ -21,6 +21,6 @@ COPY sshd_config /etc/ssh/
 
 EXPOSE 2222 80
 
-WORKDIR /defaulthome/hostingstart
+WORKDIR /home/site/wwwroot
 
-CMD ["/bin/init_container.sh"]
+ENTRYPOINT ["/bin/init_container.sh"]

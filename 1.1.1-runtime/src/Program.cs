@@ -9,9 +9,8 @@ namespace hostingstart
         {
             var host = new WebHostBuilder()
                 .UseKestrel()
-                .UseUrls("http://*:80")
                 .UseStartup<Startup>()
-                .UseWebRoot("/defaulthome/hostingstart/static")
+                .UseWebRoot("/home/site/wwwroot")
                 .Build();
 
             host.Run();
