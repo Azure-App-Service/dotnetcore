@@ -3,6 +3,7 @@ MAINTAINER Azure App Services Container Images <appsvc-images@microsoft.com>
 
 COPY bin.zip /tmp
 COPY init_container.sh /bin/
+COPY hostingstart.html /home/site/wwwroot/
 
 RUN apt-get update \
   && apt-get install -y apt-utils --no-install-recommends \
@@ -17,10 +18,14 @@ RUN echo "root:Docker!" | chpasswd \
     && apt install -y --no-install-recommends openssh-server \
     && chmod 755 /bin/init_container.sh 
 
+RUN mkdir -p /home/LogFiles/
+
 COPY sshd_config /etc/ssh/
 
 EXPOSE 2222 80
 
 WORKDIR /home/site/wwwroot
+
+ENV ASPNETCORE_URLS http://*:80
 
 ENTRYPOINT ["/bin/init_container.sh"]
