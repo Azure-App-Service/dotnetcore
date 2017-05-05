@@ -1,9 +1,16 @@
-FROM microsoft/dotnet:1.1-sdk-msbuild
+FROM microsoft/dotnet:1.1-runtime
 MAINTAINER Azure App Services Container Images <appsvc-images@microsoft.com>
 
-COPY src /defaulthome/hostingstart
+COPY bin.zip /tmp
 COPY static /defaulthome/hostingstart/static
 COPY init_container.sh /bin/
+
+RUN apt-get update \
+  && apt-get install -y apt-utils --no-install-recommends \
+  && apt-get install -y unzip --no-install-recommends
+
+RUN unzip -q -o /tmp/bin.zip -d /defaulthome/hostingstart \
+    && rm /tmp/bin.zip
 
 RUN echo "root:Docker!" | chpasswd \
     && apt update \
@@ -15,8 +22,5 @@ COPY sshd_config /etc/ssh/
 EXPOSE 2222 80
 
 WORKDIR /defaulthome/hostingstart
-
-RUN dotnet restore
-RUN dotnet build
 
 CMD ["/bin/init_container.sh"]
