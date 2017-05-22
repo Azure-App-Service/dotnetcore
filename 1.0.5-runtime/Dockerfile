@@ -15,8 +15,8 @@ RUN apt-get update \
   && echo "root:Docker!" | chpasswd \
   && apt update \
   && apt install -y --no-install-recommends openssh-server \
-  && chmod 755 /bin/init_container.sh && \
-  &&  mkdir -p /home/LogFiles/
+  && chmod 755 /bin/init_container.sh \
+  && mkdir -p /home/LogFiles/
 
 EXPOSE 2222 8080
 
