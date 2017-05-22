@@ -4,6 +4,8 @@ mkdir -p /home/LogFiles
 touch /home/LogFiles/dotnet_$WEBSITE_ROLE_INSTANCE_ID_out.log
 echo "$(date) Container started" >> /home/LogFiles/dotnet_$WEBSITE_ROLE_INSTANCE_ID_out.log
 
+[ -z "$ASPNETCORE_URLS" ] && export ASPNETCORE_URLS=http://*:"$PORT"
+
 # If there is any command line argument specified, run it
 [ $# -ne 0 ] && exec "$@"
 
