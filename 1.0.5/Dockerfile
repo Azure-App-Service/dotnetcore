@@ -1,4 +1,4 @@
-FROM microsoft/dotnet:1.1.2-runtime
+FROM microsoft/dotnet:1.0.5-runtime
 MAINTAINER Azure App Services Container Images <appsvc-images@microsoft.com>
 
 COPY bin.zip /tmp
@@ -23,6 +23,7 @@ EXPOSE 2222 8080
 ENV PORT 8080
 ENV WEBSITE_ROLE_INSTANCE_ID localRoleInstance
 ENV WEBSITE_INSTANCE_ID localInstance
+ENV PATH ${PATH}:/home/site/wwwroot
 
 WORKDIR /home/site/wwwroot
 
