@@ -14,7 +14,7 @@ RUN apt-get update \
   && rm /tmp/bin.zip \
   && echo "root:Docker!" | chpasswd \
   && apt update \
-  && apt install -y --no-install-recommends openssh-server \
+  && apt install -y --no-install-recommends openssh-server vim curl wget tcptraceroute \
   && chmod 755 /bin/init_container.sh \
   && mkdir -p /home/LogFiles/
 
