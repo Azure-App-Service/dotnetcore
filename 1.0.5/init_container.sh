@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 service ssh start
 mkdir -p /home/LogFiles
-touch /home/LogFiles/dotnet_$WEBSITE_ROLE_INSTANCE_ID_out.log
-echo "$(date) Container started" >> /home/LogFiles/dotnet_$WEBSITE_ROLE_INSTANCE_ID_out.log
+touch /home/LogFiles/dotnet_${WEBSITE_ROLE_INSTANCE_ID}_out.log
+echo "$(date) Container started" >> /home/LogFiles/dotnet_${WEBSITE_ROLE_INSTANCE_ID}_out.log
 
 [ -z "$ASPNETCORE_URLS" ] && export ASPNETCORE_URLS=http://*:"$PORT"
 
