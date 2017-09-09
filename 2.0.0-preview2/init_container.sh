@@ -1,8 +1,20 @@
 #!/usr/bin/env bash
+cat >/etc/motd <<EOL 
+  _____                               
+  /  _  \ __________ _________   ____  
+ /  /_\  \\___   /  |  \_  __ \_/ __ \ 
+/    |    \/    /|  |  /|  | \/\  ___/ 
+\____|__  /_____ \____/ |__|    \___  >
+        \/      \/                  \/ 
+   W E B   A P P   O N   L I N U X
+
+Documentation: http://aka.ms/webapp-linux
+Dotnet quickstart: https://aka.ms/dotnet-qs
+
+EOL
+cat /etc/motd
+
 service ssh start
-mkdir -p /home/LogFiles
-touch /home/LogFiles/dotnet_$WEBSITE_ROLE_INSTANCE_ID_out.log
-echo "$(date) Container started" >> /home/LogFiles/dotnet_$WEBSITE_ROLE_INSTANCE_ID_out.log
 
 [ -z "$ASPNETCORE_URLS" ] && export ASPNETCORE_URLS=http://*:"$PORT"
 
