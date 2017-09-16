@@ -13,7 +13,7 @@ RUN apt-get update \
   && unzip -q -o /tmp/bin.zip -d /defaulthome/hostingstart \
   && rm /tmp/bin.zip \
   && echo "root:Docker!" | chpasswd \
-  && echo "cd /" >> /etc/bash.bashrc \
+  && echo "cd /home" >> /etc/bash.bashrc \
   && apt update \
   && apt install -y --no-install-recommends openssh-server vim curl wget tcptraceroute \
   && chmod 755 /bin/init_container.sh \
