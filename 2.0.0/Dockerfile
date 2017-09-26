@@ -1,4 +1,4 @@
-FROM microsoft/aspnetcore:2.0.0-preview2
+FROM microsoft/aspnetcore:2.0.0
 MAINTAINER Azure App Services Container Images <appsvc-images@microsoft.com>
 
 COPY bin.zip /tmp
