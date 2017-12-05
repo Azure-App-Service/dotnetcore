@@ -15,6 +15,9 @@ EOL
 cat /etc/motd
 service ssh start
 
+# Get environment variables to show up in SSH session
+eval $(printenv | awk -F= '{print "export " $1"="$2 }' >> /etc/profile)
+
 [ -z "$ASPNETCORE_URLS" ] && export ASPNETCORE_URLS=http://*:"$PORT"
 
 # If there is any command line argument specified, run it
