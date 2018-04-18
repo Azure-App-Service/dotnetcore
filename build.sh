@@ -18,6 +18,7 @@ docker push "$1"/dotnetcore:1.1.2_"$buildnumber"
 docker push "$1"/dotnetcore:2.0.0_"$buildnumber"
 docker push "$1"/dotnetcore:2.0.5_"$buildnumber"
 docker push "$1"/dotnetcore:2.0.7_"$buildnumber"
+
 docker push "$1"/dotnetcore:latest_"$buildnumber"
 docker push "$1"/dotnetcore:latest
 
