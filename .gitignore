@@ -2,4 +2,5 @@
 *.cache
 */src/obj/*
 */src/bin/*
+*/bin/*
 */src/publish/*
