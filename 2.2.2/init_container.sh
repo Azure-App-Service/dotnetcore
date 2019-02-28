@@ -10,14 +10,13 @@ A P P   S E R V I C E   O N   L I N U X
 
 Documentation: http://aka.ms/webapp-linux
 Dotnet quickstart: https://aka.ms/dotnet-qs
-`ls -X /usr/share/dotnet/shared/Microsoft.NETCore.App | tail -n 1`
+.NETCore runtime version: `ls -X /usr/share/dotnet/shared/Microsoft.NETCore.App | tail -n 1`
 
 EOL
 cat /etc/motd
 
 # starting sshd process
 /usr/sbin/sshd
-
 
 [ -z "$ASPNETCORE_URLS" ] && export ASPNETCORE_URLS=http://*:"$PORT"
 
