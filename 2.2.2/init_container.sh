@@ -15,7 +15,9 @@ Dotnet quickstart: https://aka.ms/dotnet-qs
 EOL
 cat /etc/motd
 
-service ssh start
+# starting sshd process
+/usr/sbin/sshd
+
 
 [ -z "$ASPNETCORE_URLS" ] && export ASPNETCORE_URLS=http://*:"$PORT"
 
