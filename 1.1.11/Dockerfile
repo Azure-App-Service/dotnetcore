@@ -1,4 +1,4 @@
-FROM oryxprod/dotnetcore-1.1:20190223.1
+FROM oryxprod/dotnetcore-1.1:20190301.1
 MAINTAINER Azure App Services Container Images <appsvc-images@microsoft.com>
 
 COPY bin.zip /tmp

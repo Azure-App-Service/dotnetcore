@@ -1,5 +1,5 @@
-FROM oryxprod/dotnetcore-1.0:20190223.1
-MAINTAINER Azure App Services Container Images <appsvc-images@microsoft.com>
+FROM oryxprod/dotnetcore-1.0:20190301.1
+LABEL maintainer="Azure App Services Container Images <appsvc-images@microsoft.com>"
 
 COPY bin.zip /tmp
 COPY init_container.sh /bin/
