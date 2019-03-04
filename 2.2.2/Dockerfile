@@ -32,9 +32,10 @@ RUN mkdir -p /opt/startup \
    && (sleep 1;/tmp/ssh_setup.sh 2>&1 > /dev/null) \
    && rm -rf /tmp/* 
 
-EXPOSE 2222 8080
-
 ENV PORT 8080
+ENV SSH_PORT 2222
+EXPOSE 8080 2222
+
 ENV WEBSITE_ROLE_INSTANCE_ID localRoleInstance
 ENV WEBSITE_INSTANCE_ID localInstance
 ENV PATH ${PATH}:/home/site/wwwroot

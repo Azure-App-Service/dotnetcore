@@ -1,5 +1,5 @@
 FROM oryxprod/dotnetcore-1.1:20190301.1
-MAINTAINER Azure App Services Container Images <appsvc-images@microsoft.com>
+LABEL maintainer="Azure App Services Container Images <appsvc-images@microsoft.com>"
 
 COPY bin.zip /tmp
 COPY init_container.sh /bin/
@@ -19,9 +19,10 @@ RUN apt-get update \
   && chmod 755 /bin/init_container.sh \
   && mkdir -p /home/LogFiles/
 
-EXPOSE 2222 8080
-
 ENV PORT 8080
+ENV SSH_PORT 2222
+EXPOSE 8080 2222
+
 ENV WEBSITE_ROLE_INSTANCE_ID localRoleInstance
 ENV WEBSITE_INSTANCE_ID localInstance
 ENV PATH ${PATH}:/home/site/wwwroot
