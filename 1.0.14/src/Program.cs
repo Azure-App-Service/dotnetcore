@@ -10,7 +10,7 @@ namespace hostingstart
             var host = new WebHostBuilder()
                 .UseKestrel()
                 .UseStartup<Startup>()
-                .UseWebRoot("/home/site/wwwroot")
+                .UseWebRoot("/defaulthome/hostingstart/wwwroot")
                 .Build();
 
             host.Run();

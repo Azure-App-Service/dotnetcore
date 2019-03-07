@@ -3,7 +3,6 @@ LABEL maintainer="Azure App Services Container Images <appsvc-images@microsoft.c
 
 COPY bin.zip /tmp
 COPY init_container.sh /bin/
-COPY hostingstart.html /home/site/wwwroot/
 COPY sshd_config /etc/ssh/
 
 RUN apt-get update \
@@ -18,6 +17,8 @@ RUN apt-get update \
   && apt install -y --no-install-recommends openssh-server vim curl wget tcptraceroute \
   && chmod 755 /bin/init_container.sh \
   && mkdir -p /home/LogFiles/
+
+COPY hostingstart.html /defaulthome/hostingstart/wwwroot/
 
 ENV PORT 8080
 ENV SSH_PORT 2222
