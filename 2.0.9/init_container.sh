@@ -28,7 +28,7 @@ if [ $# -ne 0 ]; then
         echo "Argument to dotnet exists on disk, launching it:  $@"
         exec "$@"
    else
-       echo "App command line ignored, since file exists check failed"
+        echo "App command line ignored, since file $2 was not found" 
    fi
 fi
 
