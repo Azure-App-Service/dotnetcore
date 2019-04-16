@@ -1,4 +1,4 @@
-FROM oryxprod/dotnetcore-2.2:20190301.2
+FROM oryxprod/dotnetcore-2.2:20190409.1
 LABEL maintainer="Azure App Services Container Images <appsvc-images@microsoft.com>"
 
 COPY bin.zip /tmp
@@ -7,15 +7,10 @@ COPY init_container.sh /bin/
 RUN mkdir -p /home/LogFiles \
   && echo "root:Docker!" | chpasswd \
   && echo "cd /home" >> /etc/bash.bashrc \
-  && apk update --no-cache \
-  && apk add openssh \
-  && apk add openrc \
-  && apk add vim \
-  && apk add curl \
-  && apk add wget \
-  && apk add tcptraceroute \
-  && apk add bash \
-  && apk add unzip \
+  && apt-get update \
+  && apt-get install -y apt-utils --no-install-recommends \
+  && apt-get install -y unzip --no-install-recommends \
+  && apt install -y --no-install-recommends openssh-server vim curl wget tcptraceroute \
   && mkdir -p /defaulthome/hostingstart \ 
   && unzip -q -o /tmp/bin.zip -d /defaulthome/hostingstart \
   && rm /tmp/bin.zip \
