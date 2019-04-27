@@ -1,25 +1,28 @@
-FROM oryxprod/dotnetcore-2.2:20190301.2
+FROM oryxprod/dotnetcore-2.2:20190422.4
 LABEL maintainer="Azure App Services Container Images <appsvc-images@microsoft.com>"
 
-COPY bin.zip /tmp
-COPY init_container.sh /bin/
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends \
+        apt-utils \
+        unzip \
+        openssh-server \
+        vim \
+        curl \
+        wget \
+        tcptraceroute \
+    && rm -rf /var/lib/apt/lists/*
 
-RUN mkdir -p /home/LogFiles \
-  && echo "root:Docker!" | chpasswd \
-  && echo "cd /home" >> /etc/bash.bashrc \
-  && apk update --no-cache \
-  && apk add openssh \
-  && apk add openrc \
-  && apk add vim \
-  && apk add curl \
-  && apk add wget \
-  && apk add tcptraceroute \
-  && apk add bash \
-  && apk add unzip \
-  && mkdir -p /defaulthome/hostingstart \ 
-  && unzip -q -o /tmp/bin.zip -d /defaulthome/hostingstart \
-  && rm /tmp/bin.zip \
-  && chmod 755 /bin/init_container.sh 
+RUN mkdir -p /defaulthome/hostingstart \
+    && mkdir -p /home/LogFiles/ \
+    && echo "root:Docker!" | chpasswd \
+    && echo "cd /home" >> /etc/bash.bashrc
+
+COPY bin.zip /tmp
+RUN unzip -q -o /tmp/bin.zip -d /defaulthome/hostingstart \
+    && rm /tmp/bin.zip
+
+COPY init_container.sh /bin/
+RUN chmod 755 /bin/init_container.sh
 
 COPY hostingstart.html /defaulthome/hostingstart/wwwroot/
 
@@ -30,7 +33,7 @@ RUN mkdir -p /opt/startup \
    && chmod -R +x /opt/startup \
    && chmod -R +x /tmp/ssh_setup.sh \
    && (sleep 1;/tmp/ssh_setup.sh 2>&1 > /dev/null) \
-   && rm -rf /tmp/* 
+   && rm -rf /tmp/*
 
 ENV PORT 8080
 ENV SSH_PORT 2222
