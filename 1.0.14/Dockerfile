@@ -5,6 +5,15 @@ COPY bin.zip /tmp
 COPY init_container.sh /bin/
 COPY sshd_config /etc/ssh/
 
+# jessie moved to archive
+RUN echo "deb http://deb.debian.org/debian/ jessie main" > /etc/apt/sources.list \
+  && echo "deb-src http://deb.debian.org/debian/ jessie main" >> /etc/apt/sources.list \
+  && echo "deb http://security.debian.org/ jessie/updates main" >> /etc/apt/sources.list \
+  && echo "deb-src http://security.debian.org/ jessie/updates main" >> /etc/apt/sources.list \
+  && echo "deb http://archive.debian.org/debian jessie-backports main" >> /etc/apt/sources.list \
+  && echo "deb-src http://archive.debian.org/debian jessie-backports main" >> /etc/apt/sources.list \
+  && echo "Acquire::Check-Valid-Until \"false\";" > /etc/apt/apt.conf
+
 RUN apt-get update \
   && apt-get install -y apt-utils --no-install-recommends \
   && apt-get install -y unzip --no-install-recommends \
