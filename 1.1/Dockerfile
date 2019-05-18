@@ -1,9 +1,8 @@
-FROM oryxprod/dotnetcore-1.1:20190301.2
+FROM oryxprod/dotnetcore-1.1:20190516.1
 LABEL maintainer="Azure App Services Container Images <appsvc-images@microsoft.com>"
 
 COPY bin.zip /tmp
 COPY init_container.sh /bin/
-COPY sshd_config /etc/ssh/
 
 # jessie moved to archive
 RUN echo "deb http://deb.debian.org/debian/ jessie main" > /etc/apt/sources.list \
@@ -25,7 +24,16 @@ RUN apt-get update \
   && apt update \
   && apt install -y --no-install-recommends openssh-server vim curl wget tcptraceroute \
   && chmod 755 /bin/init_container.sh \
-  && mkdir -p /home/LogFiles/
+  && mkdir -p /home/LogFiles/ /opt/startup/
+
+# configure startup
+COPY sshd_config /etc/ssh/
+COPY ssh_setup.sh /tmp
+RUN mkdir -p /opt/startup \
+   && chmod -R +x /opt/startup \
+   && chmod -R +x /tmp/ssh_setup.sh \
+   && (sleep 1;/tmp/ssh_setup.sh 2>&1 > /dev/null) \
+   && rm -rf /tmp/*
 
 COPY hostingstart.html /defaulthome/hostingstart/wwwroot/
 
