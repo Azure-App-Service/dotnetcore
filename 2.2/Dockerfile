@@ -1,4 +1,4 @@
-FROM oryxprod/dotnetcore-2.2:20190422.4
+FROM oryxprod/dotnetcore-2.2:20190516.1
 LABEL maintainer="Azure App Services Container Images <appsvc-images@microsoft.com>"
 
 RUN apt-get update \
@@ -43,6 +43,7 @@ ENV WEBSITE_ROLE_INSTANCE_ID localRoleInstance
 ENV WEBSITE_INSTANCE_ID localInstance
 ENV PATH ${PATH}:/home/site/wwwroot
 ENV ASPNETCORE_URLS=
+ENV ASPNETCORE_FORWARDEDHEADERS_ENABLED=true
 
 WORKDIR /home/site/wwwroot
 
