@@ -1,4 +1,4 @@
-FROM mcr.microsoft.com/oryx/dotnetcore:2.1-20190730.1
+FROM mcr.microsoft.com/oryx/dotnetcore:2.1-20191018.1
 LABEL maintainer="Azure App Services Container Images <appsvc-images@microsoft.com>"
 
 RUN apt-get update \
@@ -10,12 +10,16 @@ RUN apt-get update \
         curl \
         wget \
         tcptraceroute \
+        net-tools \
+        dnsutils \
+        tcpdump \
+        iproute2 \
     && rm -rf /var/lib/apt/lists/*
 
 RUN mkdir -p /defaulthome/hostingstart \
     && mkdir -p /home/LogFiles/ \
     && echo "root:Docker!" | chpasswd \
-    && echo "cd /home" >> /etc/bash.bashrc
+    && echo "cd /home" >> /root/.bashrc
 
 COPY bin.zip /tmp
 RUN unzip -q -o /tmp/bin.zip -d /defaulthome/hostingstart \
@@ -44,6 +48,14 @@ ENV WEBSITE_INSTANCE_ID localInstance
 ENV PATH ${PATH}:/home/site/wwwroot
 ENV ASPNETCORE_URLS=
 ENV ASPNETCORE_FORWARDEDHEADERS_ENABLED=true
+
+# Enable automatic creation of dumps when a process crashes
+ENV COMPlus_DbgEnableMiniDump="1"
+# Create a base directory for dumps under /home so that the
+# dumps are accessible from the build container too (since a runtime container might have already crashed)
+ENV DUMP_DIR="/home/logs/dumps"
+RUN mkdir -p "$DUMP_DIR"
+RUN chmod 777 "$DUMP_DIR"
 
 WORKDIR /home/site/wwwroot
 

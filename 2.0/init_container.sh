@@ -22,6 +22,11 @@ eval $(printenv | sed -n "s/^\([^=]\+\)=\(.*\)$/export \1=\2/p" | sed 's/"/\\\"/
 sed -i "s/SSH_PORT/$SSH_PORT/g" /etc/ssh/sshd_config
 /usr/sbin/sshd
 
+# Format : coredump.hostname.processid.time 
+# Example: coredump.7d77b4ff1fea.15.1571222166
+containerName=`hostname`
+export COMPlus_DbgMiniDumpName="$DUMP_DIR/coredump.$containerName.%d.$(date +%s)"
+
 appPath="/home/site/wwwroot"
 runFromPath="/tmp/webapp"
 startupCommandPath="/opt/startup/startup.sh"
